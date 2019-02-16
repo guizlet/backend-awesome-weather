@@ -1,4 +1,4 @@
-package metaweather;
+package com.guizlet.metaweather;
 
 public class MetaWeatherDataPoint {
     private double airPressure;

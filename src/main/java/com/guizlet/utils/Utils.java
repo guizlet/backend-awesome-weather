@@ -1,8 +1,6 @@
-package utils;
+package com.guizlet.utils;
 
 import java.io.BufferedReader;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.stream.Collectors;
@@ -27,12 +25,7 @@ public class Utils {
     }
 
     static String readFromFile(String fileName) {
-        InputStream inputStream = null;
-        try {
-            inputStream = new FileInputStream(fileName);
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        }
+        InputStream inputStream = Utils.class.getResourceAsStream("/" + fileName);
         return new BufferedReader(new InputStreamReader(inputStream)).lines().collect(Collectors.joining("\n"));
     }
 }

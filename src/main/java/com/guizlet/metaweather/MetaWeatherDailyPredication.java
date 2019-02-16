@@ -1,4 +1,4 @@
-package metaweather;
+package com.guizlet.metaweather;
 
 import java.time.LocalDate;
 import java.util.List;

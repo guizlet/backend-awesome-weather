@@ -1,9 +1,11 @@
+package com.guizlet;
+
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
-import metaweather.MetaWeatherDailyPredication;
-import metaweather.MetaWeatherDataPoint;
-import metaweather.MetaWeatherService;
+import com.guizlet.metaweather.MetaWeatherDailyPredication;
+import com.guizlet.metaweather.MetaWeatherDataPoint;
+import com.guizlet.metaweather.MetaWeatherService;
 
 
 /**

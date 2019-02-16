@@ -15,3 +15,13 @@ repositories {
 dependencies {
     compile group: 'org.json', name: 'json', version: '20180813'
 }
+
+task(runExample1, dependsOn: 'classes', type: JavaExec) {
+   main = 'com.guizlet.ClientCodeExample1'
+   classpath = sourceSets.main.runtimeClasspath
+}
+
+task(runExample2, dependsOn: 'classes', type: JavaExec) {
+   main = 'com.guizlet.ClientCodeExample2'
+   classpath = sourceSets.main.runtimeClasspath
+}

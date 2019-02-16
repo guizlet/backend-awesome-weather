@@ -1,4 +1,12 @@
-**/.idea
+# Gradle
 **/.gradle
+
+# Java
 *.class
+out
+
+# Intellij
+**/.idea
 **.iml
+**.ipr
+**.iws

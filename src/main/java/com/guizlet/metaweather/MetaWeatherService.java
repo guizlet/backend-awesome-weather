@@ -1,5 +1,6 @@
-package metaweather;
+package com.guizlet.metaweather;
 
+import com.guizlet.utils.Utils;
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 import java.time.LocalDate;
@@ -10,7 +11,6 @@ import java.util.NoSuchElementException;
 import java.util.Set;
 import org.json.JSONArray;
 import org.json.JSONObject;
-import utils.Utils;
 
 
 public class MetaWeatherService {

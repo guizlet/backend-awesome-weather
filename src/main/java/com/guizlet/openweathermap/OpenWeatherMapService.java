@@ -1,4 +1,4 @@
-package openweathermap;
+package com.guizlet.openweathermap;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -7,7 +7,7 @@ import java.util.NoSuchElementException;
 import org.json.JSONArray;
 import org.json.JSONObject;
 import org.json.JSONTokener;
-import utils.Utils;
+import com.guizlet.utils.Utils;
 
 
 /**
