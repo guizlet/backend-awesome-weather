@@ -1,12 +1,13 @@
 # Gradle
-**/.gradle
+.gradle
+build
 
 # Java
 *.class
-out
 
 # Intellij
-**/.idea
 **.iml
 **.ipr
 **.iws
+.idea
+out
