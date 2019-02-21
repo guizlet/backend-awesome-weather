@@ -10,7 +10,7 @@ class MockOpenWeatherMapServer {
 
     static {
         validUrlsToFileNames.put("http://api.openweathermap.org/data/2.5/forecast?id=5391997&units=metric",
-                "openweathermap_5_days_forecast_2019_02_12.json");
+                "openweathermap_3_days_forecast_2019_02_12.json");
     }
 
     static String respond(String urlString) {

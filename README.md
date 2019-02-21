@@ -1,8 +1,16 @@
 # Background
-Awesome Weather service has been well adopted internally. It fetches weather data from the third-party service https://www.metaweather.com and processes them. Over time we start to realize that APIs from MetaWeather do not meet our new requirements. Our goal is to migrate to APIs provided by https://openweathermap.org/api which provide richer data sets, better documentation and more API parameters for finer-grained control. In the meantime, the migration should be transparent to existing clients. 
+MetaWeather service has been well adopted internally. It fetches weather data from the third-party service https://www.metaweather.com which is in turn used by several clients. Over time we start to realize that APIs from MetaWeather lack of enough features and do not meet our new requirements. Our goal is to migrate to APIs provided by https://openweathermap.org/api which provide richer data sets, better documentation and more API parameters for finer-grained control.
 
-# Prerequisites
-* JDK requirement: 1.8
+# About API responses
+* Responses from MetaWeather or OpenWeatherMap are mocked in this repo. There will be no API calls when executing the code;
+* Only 3 day forecast for San Francisco from Feb 12, 2019 are provided in the mock responses. This assumption is made across the entire code base. 
+
+* Temperature unit is Celsius in the mock responses for consistency -- MetaWeather supports Celsisu only while OpenWeatherMap supports all temperature units (one more reason to migrate!).
+* Both MetaWeather and OpenWeatherMap APIs return multiple forecast data points per day instead of daily summaries. There are some aggregation work required to derive information like the highest temperature or the lowest humidity of a given day.
+* Weather data from MetaWeather and OpenWeatherMap are not identical. It's more than acceptable to observe slightly different results after the migration. 
+
+# System requirements
+* JDK: 1.8
 * Gradle: https://gradle.org/install/
 
 # How to run example code
@@ -21,14 +29,6 @@ Average high for next 3 days in San Francisco: 13.984444444444444
 ## IntelliJ IDEA
 Open this folder in IntelliJ.
 
-# Caveats
-* Responses from MetaWeather or OpenWeatherMap are mocked, which means there is no API call when running the code;
-* Only 3 day forecast for San Francisco from Feb 12, 2019 are supported in the mock response. This assumption is reflected in the client code;
-* Temperature unit is Celsius as it is the only option in MetaWeather (one more reason to migrate!)
-* Both MetaWeather and OpenWeatherMap APIs return multiple prediction data points per day instead of daily summaries
-  (which are more common in real life weather forecast). There will be some aggregation work required to derive information like the highest temperature or the lowest humidity over a day.
-* Responses from MetaWeather and OpenWeatherMap are not exactly the same. In this interview, it's more than acceptable to see slightly different results after the migration.
-
 # References
 ## MetaWeather API Doc
 https://www.metaweather.com/api/
@@ -36,5 +36,5 @@ https://www.metaweather.com/api/
 ## OpenWeatherMap API Doc
 https://openweathermap.org/forecast5
 
-## org.json:json
+## Java library - org.json:json
 https://github.com/stleary/JSON-java
