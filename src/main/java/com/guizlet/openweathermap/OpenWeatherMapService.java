@@ -46,7 +46,7 @@ public class OpenWeatherMapService {
      * This API derives a city Id based on the requested city name and provides forecast for next 3 days based
      * on the city Id.
      *
-     * @param city the requested city name
+     * @param city city name
      * @return Json response of 3 day forecast of the resolved city Id
      */
     private String getNext3DaysForecastForCity(String city) {
