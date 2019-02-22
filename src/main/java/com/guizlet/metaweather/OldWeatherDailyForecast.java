@@ -4,16 +4,16 @@ import java.time.LocalDate;
 import java.util.List;
 
 
-public class MetaWeatherDailyForecast {
-    private List<MetaWeatherDataPoint> dataPoints;
+public class OldWeatherDailyForecast {
+    private List<OldWeatherDataPoint> dataPoints;
     private LocalDate date;
 
-    MetaWeatherDailyForecast(List<MetaWeatherDataPoint> dataPoints, LocalDate date) {
+    public OldWeatherDailyForecast(List<OldWeatherDataPoint> dataPoints, LocalDate date) {
         this.dataPoints = dataPoints;
         this.date = date;
     }
 
-    public List<MetaWeatherDataPoint> getDataPoints() {
+    public List<OldWeatherDataPoint> getDataPoints() {
         return dataPoints;
     }
 

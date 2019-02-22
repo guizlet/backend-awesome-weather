@@ -11,7 +11,7 @@ import org.json.JSONObject;
 import org.json.JSONTokener;
 
 
-public class OpenWeatherMapService {
+public class NewWeatherService {
 
     private static final String OPENWEATHERMAP_API_BASE_URL = "http://api.openweathermap.org/data/2.5/forecast";
 
@@ -20,26 +20,30 @@ public class OpenWeatherMapService {
      *
      * @param city city name
      * @param date requested date
-     * @return Daily forecast of the requested date in the form of a list of {@link JSONObject}
+     * @return Daily forecast in the form of {@link NewWeatherDailyForecast}
      */
-    public List<JSONObject> getForecastForCityAndDate(String city, LocalDate date) {
+    public NewWeatherDailyForecast getForecastForCityAndDate(String city, LocalDate date) {
         String jsonResponse = getNext3DaysForecastForCity(city);
         JSONObject jsonObject = new JSONObject(jsonResponse);
         JSONArray dataPoints = jsonObject.getJSONArray("list");
 
         String requestedDate = date.format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
-        List<JSONObject> results = new ArrayList<>();
+        List<NewWeatherDataPoint> results = new ArrayList<>();
 
         for (Object dataPoint : dataPoints) {
             JSONObject dataPointJsonObject = (JSONObject) dataPoint;
             String dateInResponse = dataPointJsonObject.getString("dt_txt");
             // Date format from OpenWeatherMap: "2019-02-15 21:00:00"
             if (dateInResponse.startsWith(requestedDate + " ")) {
-                results.add(dataPointJsonObject);
+                JSONObject mainDataBody = dataPointJsonObject.getJSONObject("main");
+                int humidity = mainDataBody.getInt("humidity");
+                double tempMax = mainDataBody.getDouble("temp_max");
+                NewWeatherDataPoint newWeatherDataPoint = new NewWeatherDataPoint(humidity, tempMax);
+                results.add(newWeatherDataPoint);
             }
         }
 
-        return results;
+        return new NewWeatherDailyForecast(results, date);
     }
 
     /**

@@ -13,7 +13,7 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 
 
-public class MetaWeatherService {
+public class OldWeatherService {
 
     private static final String METAWEATHER_API_BASE_URL = "https://www.metaweather.com/api/";
 
@@ -22,15 +22,15 @@ public class MetaWeatherService {
      *
      * @param city city name
      * @param date requested date
-     * @return Daily forecast of the requested date in the form of {@link MetaWeatherDailyForecast}
+     * @return Daily forecast of the requested date in the form of {@link OldWeatherDailyForecast}
      */
-    public MetaWeatherDailyForecast getForecastForCityAndDate(String city, LocalDate date) {
+    public OldWeatherDailyForecast getForecastForCityAndDate(String city, LocalDate date) {
         int cityId = resolveCityID(city);
         String dateString = date.format(DateTimeFormatter.ofPattern("yyyy/MM/dd"));
         String weatherAPIUrl = METAWEATHER_API_BASE_URL + "location/" + cityId + "/" + dateString;
         String response = Utils.sendRequest(weatherAPIUrl);
         JSONArray dailyWeather = new JSONArray(response);
-        List<MetaWeatherDataPoint> dataPoints = new ArrayList<>();
+        List<OldWeatherDataPoint> dataPoints = new ArrayList<>();
         for (Object forecast : dailyWeather) {
             JSONObject forecastJson = (JSONObject) forecast;
             double maxTemp = forecastJson.getDouble("max_temp");
@@ -39,29 +39,29 @@ public class MetaWeatherService {
             double airPressure = forecastJson.getDouble("air_pressure");
             int humidity = forecastJson.getInt("humidity");
             String createdTime = forecastJson.getString("created");
-            MetaWeatherDataPoint metaWeatherDataPoint =
-                    new MetaWeatherDataPoint(airPressure, createdTime, humidity, minTemp, maxTemp, windSpeed);
-            dataPoints.add(metaWeatherDataPoint);
+            OldWeatherDataPoint oldWeatherDataPoint =
+                    new OldWeatherDataPoint(airPressure, createdTime, humidity, minTemp, maxTemp, windSpeed);
+            dataPoints.add(oldWeatherDataPoint);
         }
 
-        return new MetaWeatherDailyForecast(dataPoints, date);
+        return new OldWeatherDailyForecast(dataPoints, date);
     }
 
     /**
-     * Calculate the average high temperature from a set of {@link MetaWeatherDailyForecast}. For example, if the set contains
+     * Calculate the average high temperature from a set of {@link OldWeatherDailyForecast}. For example, if the set contains
      * daily forecast of Feb 13 and Feb 14, and the high of these two days are 27 and 29 respectively, then the result would be 28.
      *
      * @param dailyForecastSet
      * @return
      */
-    public Double getAverageHighTemperature(Set<MetaWeatherDailyForecast> dailyForecastSet) {
+    public Double getAverageHighTemperature(Set<OldWeatherDailyForecast> dailyForecastSet) {
         double sum = 0.0;
         int setSize = dailyForecastSet.size();
-        for (MetaWeatherDailyForecast dailyForecast : dailyForecastSet) {
+        for (OldWeatherDailyForecast dailyForecast : dailyForecastSet) {
             double dailyHigh = Double.MIN_VALUE;
-            List<MetaWeatherDataPoint> dataPoints = dailyForecast.getDataPoints();
-            for (MetaWeatherDataPoint metaWeatherDataPoint : dataPoints) {
-                double maxTemp = metaWeatherDataPoint.getMaxTemp();
+            List<OldWeatherDataPoint> dataPoints = dailyForecast.getDataPoints();
+            for (OldWeatherDataPoint oldWeatherDataPoint : dataPoints) {
+                double maxTemp = oldWeatherDataPoint.getMaxTemp();
                 dailyHigh = maxTemp > dailyHigh ? maxTemp : dailyHigh;
             }
             sum += dailyHigh;

@@ -1,6 +1,6 @@
 package com.guizlet.metaweather;
 
-public class MetaWeatherDataPoint {
+public class OldWeatherDataPoint {
     private double airPressure;
     private String createdTime;
     private int humidity;
@@ -8,7 +8,7 @@ public class MetaWeatherDataPoint {
     private double maxTemp;
     private double windSpeed;
 
-    public MetaWeatherDataPoint(double airPressure, String createdTime, int humidity, double minTemp, double maxTemp,
+    public OldWeatherDataPoint(double airPressure, String createdTime, int humidity, double minTemp, double maxTemp,
             double windSpeed) {
         this.airPressure = airPressure;
         this.createdTime = createdTime;
