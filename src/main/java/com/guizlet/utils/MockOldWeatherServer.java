@@ -4,7 +4,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 
-class MockMetaWeatherServer {
+class MockOldWeatherServer {
 
     private static final Map<String, String> validUrlsToFileNames = new HashMap<>();
 

@@ -12,7 +12,7 @@
         "pressure": 1019.35,
         "sea_level": 1027.74,
         "grnd_level": 1019.35,
-        "humidity": 91,
+        "humidity": 68,
         "temp_kf": -0.48
       },
       "weather": [
@@ -47,7 +47,7 @@
         "pressure": 1017.34,
         "sea_level": 1025.59,
         "grnd_level": 1017.34,
-        "humidity": 100,
+        "humidity": 64,
         "temp_kf": -0.32
       },
       "weather": [
@@ -82,7 +82,7 @@
         "pressure": 1014.51,
         "sea_level": 1022.84,
         "grnd_level": 1014.51,
-        "humidity": 100,
+        "humidity": 77,
         "temp_kf": -0.16
       },
       "weather": [
@@ -117,7 +117,7 @@
         "pressure": 1011.34,
         "sea_level": 1019.73,
         "grnd_level": 1011.34,
-        "humidity": 100,
+        "humidity": 83,
         "temp_kf": 0
       },
       "weather": [
@@ -152,7 +152,7 @@
         "pressure": 1008.77,
         "sea_level": 1017.11,
         "grnd_level": 1008.77,
-        "humidity": 97,
+        "humidity": 86,
         "temp_kf": 0
       },
       "weather": [
@@ -187,7 +187,7 @@
         "pressure": 1006.46,
         "sea_level": 1014.74,
         "grnd_level": 1006.46,
-        "humidity": 94,
+        "humidity": 78,
         "temp_kf": 0
       },
       "weather": [
@@ -222,7 +222,7 @@
         "pressure": 1005.87,
         "sea_level": 1014.12,
         "grnd_level": 1005.87,
-        "humidity": 93,
+        "humidity": 81,
         "temp_kf": 0
       },
       "weather": [
@@ -257,7 +257,7 @@
         "pressure": 1004.6,
         "sea_level": 1012.75,
         "grnd_level": 1004.6,
-        "humidity": 93,
+        "humidity": 87,
         "temp_kf": 0
       },
       "weather": [
@@ -292,7 +292,7 @@
         "pressure": 1002.99,
         "sea_level": 1011.05,
         "grnd_level": 1002.99,
-        "humidity": 95,
+        "humidity": 81,
         "temp_kf": 0
       },
       "weather": [
@@ -327,7 +327,7 @@
         "pressure": 1000.54,
         "sea_level": 1008.71,
         "grnd_level": 1000.54,
-        "humidity": 92,
+        "humidity": 73,
         "temp_kf": 0
       },
       "weather": [
@@ -362,7 +362,7 @@
         "pressure": 999.04,
         "sea_level": 1007.32,
         "grnd_level": 999.04,
-        "humidity": 96,
+        "humidity": 86,
         "temp_kf": 0
       },
       "weather": [
@@ -397,7 +397,7 @@
         "pressure": 1002.83,
         "sea_level": 1011.09,
         "grnd_level": 1002.83,
-        "humidity": 100,
+        "humidity": 74,
         "temp_kf": 0
       },
       "weather": [
@@ -432,7 +432,7 @@
         "pressure": 1007.4,
         "sea_level": 1015.63,
         "grnd_level": 1007.4,
-        "humidity": 100,
+        "humidity": 80,
         "temp_kf": 0
       },
       "weather": [
@@ -467,7 +467,7 @@
         "pressure": 1011.31,
         "sea_level": 1019.61,
         "grnd_level": 1011.31,
-        "humidity": 99,
+        "humidity": 67,
         "temp_kf": 0
       },
       "weather": [
@@ -500,7 +500,7 @@
         "pressure": 1014.62,
         "sea_level": 1022.96,
         "grnd_level": 1014.62,
-        "humidity": 97,
+        "humidity": 61,
         "temp_kf": 0
       },
       "weather": [
@@ -533,7 +533,7 @@
         "pressure": 1016.3,
         "sea_level": 1024.53,
         "grnd_level": 1016.3,
-        "humidity": 98,
+        "humidity": 69,
         "temp_kf": 0
       },
       "weather": [
@@ -568,7 +568,7 @@
         "pressure": 1016.39,
         "sea_level": 1024.56,
         "grnd_level": 1016.39,
-        "humidity": 100,
+        "humidity": 86,
         "temp_kf": 0
       },
       "weather": [
@@ -603,7 +603,7 @@
         "pressure": 1016.17,
         "sea_level": 1024.49,
         "grnd_level": 1016.17,
-        "humidity": 99,
+        "humidity": 86,
         "temp_kf": 0
       },
       "weather": [
@@ -638,7 +638,7 @@
         "pressure": 1016.68,
         "sea_level": 1025.16,
         "grnd_level": 1016.68,
-        "humidity": 99,
+        "humidity": 80,
         "temp_kf": 0
       },
       "weather": [
@@ -673,7 +673,7 @@
         "pressure": 1017.87,
         "sea_level": 1026.1,
         "grnd_level": 1017.87,
-        "humidity": 100,
+        "humidity": 66,
         "temp_kf": 0
       },
       "weather": [
@@ -708,7 +708,7 @@
         "pressure": 1018.71,
         "sea_level": 1027.16,
         "grnd_level": 1018.71,
-        "humidity": 99,
+        "humidity": 66,
         "temp_kf": 0
       },
       "weather": [
@@ -743,7 +743,7 @@
         "pressure": 1019.43,
         "sea_level": 1027.84,
         "grnd_level": 1019.43,
-        "humidity": 97,
+        "humidity": 71,
         "temp_kf": 0
       },
       "weather": [
@@ -776,7 +776,7 @@
         "pressure": 1020.63,
         "sea_level": 1029.13,
         "grnd_level": 1020.63,
-        "humidity": 100,
+        "humidity": 71,
         "temp_kf": 0
       },
       "weather": [
@@ -811,7 +811,7 @@
         "pressure": 1020.87,
         "sea_level": 1029.28,
         "grnd_level": 1020.87,
-        "humidity": 100,
+        "humidity": 74,
         "temp_kf": 0
       },
       "weather": [

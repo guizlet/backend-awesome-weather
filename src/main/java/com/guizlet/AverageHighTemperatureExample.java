@@ -1,31 +1,45 @@
 package com.guizlet;
 
 import com.guizlet.metaweather.OldWeatherDailyForecast;
+import com.guizlet.metaweather.OldWeatherDataPoint;
 import com.guizlet.metaweather.OldWeatherService;
 import com.guizlet.utils.Constants;
-import java.time.LocalDate;
-import java.util.HashSet;
+import com.guizlet.utils.OldWeatherClient;
+import java.util.Comparator;
+import java.util.List;
+import java.util.Optional;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 
 /**
- * This client calculates average high temperatures of next 3 day.
+ * This example calculates average high temperatures of next 3 day.
  */
 public class AverageHighTemperatureExample {
     public static void main(String[] args) {
-        OldWeatherService oldWeatherService = new OldWeatherService();
-        Set<OldWeatherDailyForecast> next3DaysForecast = new HashSet<>();
+        double average = calculateAverageHighTemperature();
 
-        LocalDate currentDate = Constants.TODAY;
-        String city = "San Francisco";
+        System.out.println("Average high for next 3 days: " + average);
+    }
 
-        for (int i = 0; i < 3; i++) {
-            currentDate = currentDate.plusDays(1);
-            OldWeatherDailyForecast forecast = oldWeatherService.getForecastForCityAndDate(city, currentDate);
-            next3DaysForecast.add(forecast);
-        }
+    static double calculateAverageHighTemperature() {
+        OldWeatherService oldWeatherService = new OldWeatherService(new OldWeatherClient());
 
-        Double averageHighTemperature = oldWeatherService.getAverageHighTemperature(next3DaysForecast);
-        System.out.println("Average high for next 3 days in " + city + ": " + averageHighTemperature);
+        List<OldWeatherDailyForecast> next3DaysForecast =
+                oldWeatherService.getNext3DaysForecast(Constants.CITY_SAN_FRANCISCO, Constants.TODAY);
+
+        Set<Double> dailyHighs = next3DaysForecast.stream()
+                .map(dailyForecast -> dailyForecast.getDataPoints()
+                        .stream()
+                        .max(Comparator.comparing(OldWeatherDataPoint::getMaxTemp))
+                        .map(OldWeatherDataPoint::getMaxTemp))
+                .filter(Optional::isPresent)
+                .map(Optional::get)
+                .collect(Collectors.toSet());
+
+        double sum = dailyHighs.stream().mapToDouble(Double::doubleValue).sum();
+        double size = dailyHighs.size();
+
+        return sum / size;
     }
 }
