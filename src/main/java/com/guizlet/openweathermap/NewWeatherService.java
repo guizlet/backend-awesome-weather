@@ -1,19 +1,46 @@
 package com.guizlet.openweathermap;
 
-import com.guizlet.utils.Utils;
+import com.guizlet.utils.NewWeatherClient;
 import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.NoSuchElementException;
+import java.util.Optional;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
+import java.util.stream.StreamSupport;
 import org.json.JSONArray;
 import org.json.JSONObject;
-import org.json.JSONTokener;
 
 
 public class NewWeatherService {
 
-    private static final String OPENWEATHERMAP_API_BASE_URL = "http://api.openweathermap.org/data/2.5/forecast";
+    private static final String JSON_KEY_DATE = "dt_txt";
+    private static final String JSON_KEY_MAIN = "main";
+    private static final String JSON_KEY_LIST = "list";
+    private static final String JSON_KEY_HUMIDITY = "humidity";
+    private static final String JSON_KEY_TEMP_MAX = "temp_max";
+
+    private final NewWeatherClient newWeatherClient;
+
+    public NewWeatherService(NewWeatherClient newWeatherClient) {
+        this.newWeatherClient = newWeatherClient;
+    }
+
+    public List<NewWeatherDailyForecast> getNext3DaysForecast(String city, LocalDate requestedDate) {
+        String jsonResponse = newWeatherClient.sendRequest(city);
+
+        JSONObject jsonObject = new JSONObject(jsonResponse);
+        JSONArray dataPoints = jsonObject.getJSONArray(JSON_KEY_LIST);
+
+        Map<String, List<NewWeatherDataPoint>> dataPointsByDate = getNewWeatherDataPointStream(dataPoints).collect(
+                Collectors.groupingBy(NewWeatherDataPoint::getApplicableDate));
+
+        return dataPointsByDate.entrySet()
+                .stream()
+                .map(entry -> new NewWeatherDailyForecast(entry.getValue(), LocalDate.parse(entry.getKey())))
+                .collect(Collectors.toList());
+    }
 
     /**
      * Get weather forecast for a given city name and a date.
@@ -23,65 +50,27 @@ public class NewWeatherService {
      * @return Daily forecast in the form of {@link NewWeatherDailyForecast}
      */
     public NewWeatherDailyForecast getForecastForCityAndDate(String city, LocalDate date) {
-        String jsonResponse = getNext3DaysForecastForCity(city);
-        JSONObject jsonObject = new JSONObject(jsonResponse);
-        JSONArray dataPoints = jsonObject.getJSONArray("list");
+        Optional<NewWeatherDailyForecast> newWeatherDailyForecastOptional = getNext3DaysForecast(city, date).stream()
+                .filter(newWeatherDailyForecast -> newWeatherDailyForecast.getLocalDate().isEqual(date))
+                .findFirst();
 
-        String requestedDate = date.format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
-        List<NewWeatherDataPoint> results = new ArrayList<>();
+        if (newWeatherDailyForecastOptional.isPresent()) {
+            return newWeatherDailyForecastOptional.get();
+        } else {
+            throw new NoSuchElementException("Date not found: " + date);
+        }
+    }
 
-        for (Object dataPoint : dataPoints) {
+    private Stream<NewWeatherDataPoint> getNewWeatherDataPointStream(JSONArray dataPoints) {
+        return StreamSupport.stream(dataPoints.spliterator(), false).map(dataPoint -> {
             JSONObject dataPointJsonObject = (JSONObject) dataPoint;
-            String dateInResponse = dataPointJsonObject.getString("dt_txt");
+            JSONObject mainDataBody = dataPointJsonObject.getJSONObject(JSON_KEY_MAIN);
+            int humidity = mainDataBody.getInt(JSON_KEY_HUMIDITY);
+            double tempMax = mainDataBody.getDouble(JSON_KEY_TEMP_MAX);
             // Date format from OpenWeatherMap: "2019-02-15 21:00:00"
-            if (dateInResponse.startsWith(requestedDate + " ")) {
-                JSONObject mainDataBody = dataPointJsonObject.getJSONObject("main");
-                int humidity = mainDataBody.getInt("humidity");
-                double tempMax = mainDataBody.getDouble("temp_max");
-                NewWeatherDataPoint newWeatherDataPoint = new NewWeatherDataPoint(humidity, tempMax);
-                results.add(newWeatherDataPoint);
-            }
-        }
+            String applicableDate = dataPointJsonObject.getString(JSON_KEY_DATE).split(" ")[0];
 
-        return new NewWeatherDailyForecast(results, date);
-    }
-
-    /**
-     * This API derives a city Id based on the requested city name and provides forecast for next 3 days based
-     * on the city Id.
-     *
-     * @param city city name
-     * @return Json response of 3 day forecast of the resolved city Id
-     */
-    private String getNext3DaysForecastForCity(String city) {
-        Integer cityId = resolveCityId(city);
-        // "units=metric" to set temperature unit to Celsius
-        String urlString = OPENWEATHERMAP_API_BASE_URL + "?id=" + cityId + "&units=metric";
-        return Utils.sendRequest(urlString);
-    }
-
-    /**
-     * Resolve a city Id based on the requested city name.
-     *
-     * @param city city name
-     * @return resolved city Id
-     * @throws NoSuchElementException if no city Id is found matching the city name
-     */
-    private int resolveCityId(String city) {
-        String fileContent = Utils.readFromFile("openweathermap_cities.json");
-        JSONTokener jsonTokener = new JSONTokener(fileContent);
-        JSONArray jsonArray = new JSONArray(jsonTokener);
-        Integer cityId = null;
-        for (Object cityInfo : jsonArray) {
-            JSONObject cityJsonObject = (JSONObject) cityInfo;
-            if (cityJsonObject.getString("name").equals(city)) {
-                cityId = cityJsonObject.getInt("id");
-                break;
-            }
-        }
-        if (cityId == null) {
-            throw new NoSuchElementException("No city found for the given input: " + city);
-        }
-        return cityId;
+            return new NewWeatherDataPoint(applicableDate, humidity, tempMax);
+        });
     }
 }
