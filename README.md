@@ -24,8 +24,14 @@ Note: For simplicity, we'll refer to MetaWeather as "old service" and OpenWeathe
 * JDK: 1.8
 * Gradle: https://gradle.org/install/
 
-# How to run example code
-## Command line
+# How to run example code and tests from command line
+Run unit tests
+```
+$ gradle test
+
+BUILD SUCCESSFUL in 0s
+4 actionable tasks: 4 up-to-date
+```
 Run LowestHumidityExample:
 ```
 $ gradle runLowestHumidityExample
@@ -39,9 +45,6 @@ $ gradle runAverageHighTemperatureExample
 ...
 Average high for next 3 days in San Francisco: 13.984444444444444
 ```
-
-## IntelliJ IDEA
-Open this folder in IntelliJ
 
 # References
 ## MetaWeather API Doc

@@ -9,7 +9,7 @@ import static org.junit.Assert.*;
 
 public class LowestHumidityExampleTest {
     @Test
-    public static void testResult() {
+    public void testResult() {
         Optional<OldWeatherDataPoint> result = LowestHumidityExample.calculateLowestHumidity();
         double expected = 58;
         assertTrue(result.isPresent());

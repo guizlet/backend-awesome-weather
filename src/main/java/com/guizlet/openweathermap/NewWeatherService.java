@@ -27,7 +27,7 @@ public class NewWeatherService {
         this.newWeatherClient = newWeatherClient;
     }
 
-    public List<NewWeatherDailyForecast> getNext3DaysForecast(String city, LocalDate requestedDate) {
+    public List<NewWeatherDailyForecast> getNext3DaysForecast(String city, LocalDate date) {
         String jsonResponse = newWeatherClient.sendRequest(city);
 
         JSONObject jsonObject = new JSONObject(jsonResponse);
