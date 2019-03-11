@@ -3,8 +3,9 @@ MetaWeather service has been well adopted internally. Its main responsibility is
 
 Note: For simplicity, we'll refer to MetaWeather as "old service" and OpenWeatherMap as "new service" across all Java classes. 
 
-# Migration goals
-* Migrate example code to OpenWeatherMap APIs.
+# Goals
+* Migrate example code to OpenWeatherMap APIs;
+* Apply software best practices whenever possible. 
 
 # File structure
 * Java class `LowestHumidityExample.java` and `AverageHighTemperatureExample.java`: where migration will take place;
@@ -19,10 +20,6 @@ Note: For simplicity, we'll refer to MetaWeather as "old service" and OpenWeathe
 * Temperature unit is Celsius in the mock responses for consistency -- MetaWeather supports Celsius only while OpenWeatherMap supports all temperature units (one more reason to migrate!);
 * Both MetaWeather and OpenWeatherMap APIs return multiple forecast data points per day instead of daily summaries. Information like lowest humidity or highest temperature is derived from aggregated results of raw data (That piece of code is provided).
 * Weather data from MetaWeather and OpenWeatherMap is not identical. It's more than acceptable to observe slightly different results after the migration.
-
-# System requirements
-* JDK: 1.8
-* Gradle: https://gradle.org/install/
 
 # How to run example code and tests from command line
 Run unit tests
@@ -45,6 +42,10 @@ $ gradle runAverageHighTemperatureExample
 ...
 Average high for next 3 days in San Francisco: 13.984444444444444
 ```
+
+# System requirements
+* JDK: 1.8
+* Gradle: https://gradle.org/install/
 
 # References
 ## MetaWeather API Doc
