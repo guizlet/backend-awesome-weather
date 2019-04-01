@@ -28,7 +28,7 @@ public class NewWeatherService {
   }
 
   /**
-   * Get next 3 days forecast from openweathermap.org.
+   * Get forecasts for each of the 3 days after <code>date</code> from openweathermap.org.
    *
    * @param city the requested city
    * @param date the requested date.
@@ -50,26 +50,6 @@ public class NewWeatherService {
         .map(
             entry -> new NewWeatherDailyForecast(entry.getValue(), LocalDate.parse(entry.getKey())))
         .collect(Collectors.toList());
-  }
-
-  /**
-   * Get weather forecast for a given city name and a date.
-   *
-   * @param city city name
-   * @param date requested date
-   * @return Daily forecast in the form of {@link NewWeatherDailyForecast}
-   */
-  public NewWeatherDailyForecast getForecastForCityAndDate(String city, LocalDate date) {
-    Optional<NewWeatherDailyForecast> newWeatherDailyForecastOptional = getNext3DaysForecast(city,
-        date).stream()
-        .filter(newWeatherDailyForecast -> newWeatherDailyForecast.getLocalDate().isEqual(date))
-        .findFirst();
-
-    if (newWeatherDailyForecastOptional.isPresent()) {
-      return newWeatherDailyForecastOptional.get();
-    } else {
-      throw new NoSuchElementException("Date not found: " + date);
-    }
   }
 
   private Stream<NewWeatherDataPoint> getNewWeatherDataPointStream(JSONArray dataPoints) {
