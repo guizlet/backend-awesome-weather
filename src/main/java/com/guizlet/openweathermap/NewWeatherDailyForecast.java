@@ -5,19 +5,20 @@ import java.util.List;
 
 
 public class NewWeatherDailyForecast {
-    private final List<NewWeatherDataPoint> dataPoints;
-    private final LocalDate localDate;
 
-    public NewWeatherDailyForecast(List<NewWeatherDataPoint> dataPoints, LocalDate localDate) {
-        this.dataPoints = dataPoints;
-        this.localDate = localDate;
-    }
+  private final List<NewWeatherDataPoint> dataPoints;
+  private final LocalDate localDate;
 
-    public List<NewWeatherDataPoint> getDataPoints() {
-        return dataPoints;
-    }
+  public NewWeatherDailyForecast(List<NewWeatherDataPoint> dataPoints, LocalDate localDate) {
+    this.dataPoints = dataPoints;
+    this.localDate = localDate;
+  }
 
-    public LocalDate getLocalDate() {
-        return localDate;
-    }
+  public List<NewWeatherDataPoint> getDataPoints() {
+    return dataPoints;
+  }
+
+  public LocalDate getLocalDate() {
+    return localDate;
+  }
 }

@@ -16,30 +16,31 @@ import java.util.stream.Collectors;
  * This example calculates average high temperatures of next 3 day.
  */
 public class AverageHighTemperatureExample {
-    public static void main(String[] args) {
-        double average = calculateAverageHighTemperature();
 
-        System.out.println("Average high for next 3 days: " + average);
-    }
+  public static void main(String[] args) {
+    double average = calculateAverageHighTemperature();
 
-    static double calculateAverageHighTemperature() {
-        OldWeatherService oldWeatherService = new OldWeatherService(new OldWeatherClient());
+    System.out.println("Average high for next 3 days: " + average);
+  }
 
-        List<OldWeatherDailyForecast> next3DaysForecast =
-                oldWeatherService.getNext3DaysForecast(Constants.CITY_SAN_FRANCISCO, Constants.TODAY);
+  static double calculateAverageHighTemperature() {
+    OldWeatherService oldWeatherService = new OldWeatherService(new OldWeatherClient());
 
-        Set<Double> dailyHighs = next3DaysForecast.stream()
-                .map(dailyForecast -> dailyForecast.getDataPoints()
-                        .stream()
-                        .max(Comparator.comparing(OldWeatherDataPoint::getMaxTemp))
-                        .map(OldWeatherDataPoint::getMaxTemp))
-                .filter(Optional::isPresent)
-                .map(Optional::get)
-                .collect(Collectors.toSet());
+    List<OldWeatherDailyForecast> next3DaysForecast =
+        oldWeatherService.getNext3DaysForecast(Constants.CITY_SAN_FRANCISCO, Constants.TODAY);
 
-        double sum = dailyHighs.stream().mapToDouble(Double::doubleValue).sum();
-        double size = dailyHighs.size();
+    Set<Double> dailyHighs = next3DaysForecast.stream()
+        .map(dailyForecast -> dailyForecast.getDataPoints()
+            .stream()
+            .max(Comparator.comparing(OldWeatherDataPoint::getMaxTemp))
+            .map(OldWeatherDataPoint::getMaxTemp))
+        .filter(Optional::isPresent)
+        .map(Optional::get)
+        .collect(Collectors.toSet());
 
-        return sum / size;
-    }
+    double sum = dailyHighs.stream().mapToDouble(Double::doubleValue).sum();
+    double size = dailyHighs.size();
+
+    return sum / size;
+  }
 }

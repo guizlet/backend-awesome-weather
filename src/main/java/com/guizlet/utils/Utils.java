@@ -7,8 +7,10 @@ import java.util.stream.Collectors;
 
 
 class Utils {
-    static String readFromFile(String fileName) {
-        InputStream inputStream = Utils.class.getResourceAsStream("/" + fileName);
-        return new BufferedReader(new InputStreamReader(inputStream)).lines().collect(Collectors.joining("\n"));
-    }
+
+  static String readFromFile(String fileName) {
+    InputStream inputStream = Utils.class.getResourceAsStream("/" + fileName);
+    return new BufferedReader(new InputStreamReader(inputStream)).lines()
+        .collect(Collectors.joining("\n"));
+  }
 }

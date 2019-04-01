@@ -14,23 +14,24 @@ import java.util.Optional;
  * This example finds the day with the lowest humidity among next 3 days.
  */
 public class LowestHumidityExample {
-    public static void main(String[] args) {
-        Optional<OldWeatherDataPoint> dataPointWithLowestHumidity = calculateLowestHumidity();
 
-        dataPointWithLowestHumidity.ifPresent(minHumidityDataPoint -> {
-            System.out.println("Lowest humidity: " + minHumidityDataPoint.getHumidity());
-            System.out.println("Lowest humidity date: " + minHumidityDataPoint.getApplicableDate());
-        });
-    }
+  public static void main(String[] args) {
+    Optional<OldWeatherDataPoint> dataPointWithLowestHumidity = calculateLowestHumidity();
 
-    static Optional<OldWeatherDataPoint> calculateLowestHumidity() {
-        OldWeatherService oldWeatherService = new OldWeatherService(new OldWeatherClient());
+    dataPointWithLowestHumidity.ifPresent(minHumidityDataPoint -> {
+      System.out.println("Lowest humidity: " + minHumidityDataPoint.getHumidity());
+      System.out.println("Lowest humidity date: " + minHumidityDataPoint.getApplicableDate());
+    });
+  }
 
-        List<OldWeatherDailyForecast> next3DaysForecast =
-                oldWeatherService.getNext3DaysForecast(Constants.CITY_SAN_FRANCISCO, Constants.TODAY);
+  static Optional<OldWeatherDataPoint> calculateLowestHumidity() {
+    OldWeatherService oldWeatherService = new OldWeatherService(new OldWeatherClient());
 
-        return next3DaysForecast.stream()
-                .flatMap(dailyForecast -> dailyForecast.getDataPoints().stream())
-                .min(Comparator.comparing(OldWeatherDataPoint::getHumidity));
-    }
+    List<OldWeatherDailyForecast> next3DaysForecast =
+        oldWeatherService.getNext3DaysForecast(Constants.CITY_SAN_FRANCISCO, Constants.TODAY);
+
+    return next3DaysForecast.stream()
+        .flatMap(dailyForecast -> dailyForecast.getDataPoints().stream())
+        .min(Comparator.comparing(OldWeatherDataPoint::getHumidity));
+  }
 }
