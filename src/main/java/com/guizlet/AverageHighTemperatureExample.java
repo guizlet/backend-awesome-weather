@@ -17,6 +17,11 @@ import java.util.stream.Collectors;
  */
 public class AverageHighTemperatureExample {
 
+  /**
+   * Entrypoint for command line execution.
+   *
+   * @param args arguments supplied on command line.
+   */
   public static void main(String[] args) {
     double average = calculateAverageHighTemperature();
 

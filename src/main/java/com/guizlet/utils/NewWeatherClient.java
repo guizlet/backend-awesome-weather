@@ -1,5 +1,6 @@
 package com.guizlet.utils;
 
+import java.time.LocalDate;
 import java.util.NoSuchElementException;
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -13,7 +14,17 @@ public class NewWeatherClient {
   private static final String JSON_KEY_CITY_NAME = "name";
   private static final String JSON_KEY_CITY_ID = "id";
 
-  public String sendRequest(String city) {
+  /**
+   * Get weather information from openweathermap.org by city and date.
+   *
+   * @param city the requested city.
+   * @param date the requested date. The OpenWeatherMap API used in this code repo only returns
+   *             next 3 days weather information of current date. There is another API for fetching
+   *             weather information for any dates but it's a paid feature. We will keep the date
+   *             here to stay consistent with the interface of OldWeatherClient.
+   * @return mocked JSON response in String.
+   */
+  public String sendRequest(String city, LocalDate date) {
     Integer cityId = resolveCityId(city);
     // "units=metric" to set temperature unit to Celsius
     String urlString = API_BASE_URL + "?id=" + cityId + "&units=metric";

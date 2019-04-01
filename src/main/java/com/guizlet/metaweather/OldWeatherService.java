@@ -23,10 +23,18 @@ public class OldWeatherService {
     this.oldWeatherClient = oldWeatherClient;
   }
 
-  public List<OldWeatherDailyForecast> getNext3DaysForecast(String city, LocalDate requestedDate) {
-    return IntStream.rangeClosed(1, Constants.FORECAST_DAYS).mapToObj(nextDay -> {
-      LocalDate date = requestedDate.plusDays(nextDay);
-      return getForecastForCityAndDate(city, date);
+  /**
+   * Get next 3 days forecast from metaweather.com.
+   *
+   * @param city the requested city.
+   * @param date the requested date.
+   * @return a list of {@link OldWeatherDailyForecast}. Each {@link OldWeatherDailyForecast}
+   *     represents a daily forecast of next 3 days.
+   */
+  public List<OldWeatherDailyForecast> getNext3DaysForecast(String city, LocalDate date) {
+    return IntStream.rangeClosed(1, Constants.FORECAST_DAYS).mapToObj(oneDayIncrement -> {
+      LocalDate nextDate = date.plusDays(oneDayIncrement);
+      return getForecastForCityAndDate(city, nextDate);
     }).collect(Collectors.toList());
   }
 

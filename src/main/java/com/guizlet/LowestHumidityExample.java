@@ -15,6 +15,11 @@ import java.util.Optional;
  */
 public class LowestHumidityExample {
 
+  /**
+   * Entrypoint for command line execution.
+   *
+   * @param args arguments supplied on command line.
+   */
   public static void main(String[] args) {
     Optional<OldWeatherDataPoint> dataPointWithLowestHumidity = calculateLowestHumidity();
 

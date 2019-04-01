@@ -27,8 +27,16 @@ public class NewWeatherService {
     this.newWeatherClient = newWeatherClient;
   }
 
+  /**
+   * Get next 3 days forecast from openweathermap.org.
+   *
+   * @param city the requested city
+   * @param date the requested date.
+   * @return a list of {@link NewWeatherDailyForecast}. Each {@link NewWeatherDailyForecast}
+   *     represents a daily forecast of next 3 days.
+   */
   public List<NewWeatherDailyForecast> getNext3DaysForecast(String city, LocalDate date) {
-    String jsonResponse = newWeatherClient.sendRequest(city);
+    String jsonResponse = newWeatherClient.sendRequest(city, date);
 
     JSONObject jsonObject = new JSONObject(jsonResponse);
     JSONArray dataPoints = jsonObject.getJSONArray(JSON_KEY_LIST);
