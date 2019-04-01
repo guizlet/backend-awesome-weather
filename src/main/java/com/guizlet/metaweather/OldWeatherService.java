@@ -24,7 +24,7 @@ public class OldWeatherService {
   }
 
   /**
-   * Get next 3 days forecast from metaweather.com.
+   * Get forecasts for each of the 3 days after <code>date</code> from metaweather.com.
    *
    * @param city the requested city.
    * @param date the requested date.
