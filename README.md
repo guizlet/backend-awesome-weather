@@ -1,7 +1,7 @@
 # Background
-MetaWeather service has been well adopted internally. Its main responsibility is to fetch weather data from the third-party service https://www.metaweather.com which is in turn consumed by several downstream clients. Over time we start to realize that APIs from MetaWeather lack of enough features and do not meet our new requirements. Our goal is to migrate to APIs provided by https://openweathermap.org/api which provide richer data sets, better documentation and more API parameters for finer-grained control.
+MetaWeather service has been well adopted internally. Its main responsibility is to fetch weather data from the third-party service https://www.metaweather.com which is in turn consumed by several downstream clients. Over time we start to realize that APIs from MetaWeather lack some features and do not meet our new requirements. Our goal is to migrate to APIs provided by https://openweathermap.org/api , which provide richer data sets, better documentation and more API parameters for finer-grained control.
 
-Note: For simplicity, we'll refer to MetaWeather as "old service" and OpenWeatherMap as "new service" across all Java classes. 
+Note: For simplicity, we'll refer to MetaWeather as "old service" and OpenWeatherMap as "new service" across all Java classes.
 
 # Goals
 * Migrate example code to OpenWeatherMap APIs;
