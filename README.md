@@ -4,15 +4,23 @@ MetaWeather service has been well adopted internally. Its main responsibility is
 Note: For simplicity, we'll refer to MetaWeather as "old service" and OpenWeatherMap as "new service" across all Java classes.
 
 # Goals
-* Migrate example code to OpenWeatherMap APIs;
-* Apply software best practices whenever possible. 
+* Migrate example code `LowestHumidityExample.java` to OpenWeatherMap APIs;
+* Apply software best practices whenever possible;
+* Use existing unit tests to verify migration results. 
 
 # File structure
-* Java class `LowestHumidityExample.java` and `AverageHighTemperatureExample.java`: where migration will take place;
-* Java package `metaweather` and `openweathermap`: MetaWeather and OpenWeatherMap classes. They are fully implemented and require no further changes;
-* Java package `util`: util classes and functions which are *not* in the critical path of the migration;  
+## src/main/java
+* Java class `LowestHumidityExample.java`: where migration will take place;
+* Java class `AverageHighTemperatureExample.java`: other examples that illustrate how weather services are being use. Migration is *not* required;
+* Java package `metaweather` and `openweathermap`: MetaWeather and OpenWeatherMap service classes and data models ;
+* Java package `util`: util classes and functions which are *not* in the critical path of the migration.
+
+## src/main/resources
 * Json file `metaweather_san_francisco_weather_2019_02_13.json`: the mock response of MetaWeather APIs;
 * Json file `openweathermap_3_days_forecast_2019_02_12.json`: the mock response of OpenWeatherMap APIs.
+
+## src/main/test
+* Java class `LowestHumidityExampleTest.java` and `AverageHighTemperatureExampleTest`: unit tests.
 
 # About code and API responses
 * Responses from MetaWeather or OpenWeatherMap are mocked in this repo. There will be no actual API calls when the code is executed;
