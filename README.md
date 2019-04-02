@@ -4,14 +4,14 @@ MetaWeather service has been well adopted internally. Its main responsibility is
 Note: For simplicity, we'll refer to MetaWeather as "old service" and OpenWeatherMap as "new service" across all Java classes.
 
 # Goals
-* Migrate example code `LowestHumidityExample.java` to OpenWeatherMap APIs;
-* Apply software best practices whenever possible;
+* Migrate the example code `LowestHumidityExample.java` to OpenWeatherMap APIs;
+* Design software so that we will modify less code when migrating to yet another weather service in the future;
 * Use existing unit tests to verify migration results. 
 
 # File structure
 ## src/main/java
 * Java class `LowestHumidityExample.java`: where migration will take place;
-* Java class `AverageHighTemperatureExample.java`: other examples that illustrate how weather services are being use. Migration is *not* required;
+* Java class `AverageHighTemperatureExample.java`: other example(s) that illustrate how weather services are being use. Migration is *not* required in this interview;
 * Java package `metaweather` and `openweathermap`: MetaWeather and OpenWeatherMap service classes and data models ;
 * Java package `util`: util classes and functions which are *not* in the critical path of the migration.
 
