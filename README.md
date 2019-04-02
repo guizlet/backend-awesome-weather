@@ -5,7 +5,7 @@ Note: For simplicity, we'll refer to MetaWeather as "old service" and OpenWeathe
 
 # Goals
 * Migrate the example code `LowestHumidityExample.java` to OpenWeatherMap APIs;
-* Design software so that we will modify less code when migrating to yet another weather service in the future;
+* Apply best practices of code design so that we will modify less code when migrating to yet another weather service in the future;
 * Use existing unit tests to verify migration results. 
 
 # File structure
@@ -20,7 +20,7 @@ Note: For simplicity, we'll refer to MetaWeather as "old service" and OpenWeathe
 * Json file `openweathermap_3_days_forecast_2019_02_12.json`: the mock response of OpenWeatherMap APIs.
 
 ## src/main/test
-* Java class `LowestHumidityExampleTest.java` and `AverageHighTemperatureExampleTest`: unit tests.
+* Java class `LowestHumidityExampleTest.java` and `AverageHighTemperatureExampleTest.java`: unit tests.
 
 # About code and API responses
 * Responses from MetaWeather or OpenWeatherMap are mocked in this repo. There will be no actual API calls when the code is executed;
