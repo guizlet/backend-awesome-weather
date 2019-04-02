@@ -16,6 +16,6 @@ public class LowestHumidityExampleTest {
     double expected = 58;
     assertTrue(result.isPresent());
     // We accept some difference in results of MetaWeather and OpenWeatherMap
-    assertEquals(expected, result.get().getHumidity(), 5);
+    assertEquals(expected, result.get().getHumidity(), 1);
   }
 }
