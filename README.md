@@ -29,7 +29,17 @@ Note: For simplicity, we'll refer to MetaWeather as "old service" and OpenWeathe
 * Both MetaWeather and OpenWeatherMap APIs return multiple forecast data points per day instead of daily summaries. Information like lowest humidity or highest temperature is derived from aggregated results of raw data (That piece of code is provided).
 * Weather data from MetaWeather and OpenWeatherMap is not identical. It's more than acceptable to observe slightly different results after the migration.
 
-# How to run example code and tests from command line
+# Submit your solution
+Before you start, create a new branch for your solution:
+```
+git checkout -b "interview/${USER}"
+```
+Submitting the solution:
+```
+git push -u origin "interview/${USER}"
+```
+
+# Run tests
 Run unit tests
 ```
 $ ./gradlew test
