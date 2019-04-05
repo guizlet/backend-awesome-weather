@@ -2,9 +2,9 @@ package com.guizlet.metaweather;
 
 public class OldWeatherDataPoint {
 
-  private String applicableDate;
-  private int humidity;
-  private double maxTemp;
+  private final String applicableDate;
+  private final int humidity;
+  private final double maxTemp;
 
   OldWeatherDataPoint(String applicableDate, int humidity, double maxTemp) {
     this.applicableDate = applicableDate;
