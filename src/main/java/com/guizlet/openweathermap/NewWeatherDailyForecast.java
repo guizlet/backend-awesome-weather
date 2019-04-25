@@ -7,18 +7,18 @@ import java.util.List;
 public class NewWeatherDailyForecast {
 
   private final List<NewWeatherDataPoint> dataPoints;
-  private final LocalDate localDate;
+  private final LocalDate date;
 
-  public NewWeatherDailyForecast(List<NewWeatherDataPoint> dataPoints, LocalDate localDate) {
+  NewWeatherDailyForecast(List<NewWeatherDataPoint> dataPoints, LocalDate date) {
     this.dataPoints = dataPoints;
-    this.localDate = localDate;
+    this.date = date;
   }
 
   public List<NewWeatherDataPoint> getDataPoints() {
     return dataPoints;
   }
 
-  public LocalDate getLocalDate() {
-    return localDate;
+  public LocalDate getDate() {
+    return date;
   }
 }

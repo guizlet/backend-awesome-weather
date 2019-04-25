@@ -6,8 +6,8 @@ import java.util.List;
 
 public class OldWeatherDailyForecast {
 
-  private final LocalDate date;
   private final List<OldWeatherDataPoint> dataPoints;
+  private final LocalDate date;
 
   OldWeatherDailyForecast(List<OldWeatherDataPoint> dataPoints, LocalDate date) {
     this.dataPoints = dataPoints;

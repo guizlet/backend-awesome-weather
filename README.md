@@ -6,7 +6,7 @@ Note: For simplicity, we'll refer to MetaWeather as "old service" and OpenWeathe
 # Goals
 * Improve code design in this project so that we will modify less code when migrating to yet another weather service in the future;
 * Migrate the example code `LowestHumidityExample.java` to OpenWeatherMap APIs;
-* Use existing unit tests to verify migration results. 
+* Use existing unit tests to verify migration results.
 
 # File structure
 ## src/main/java
@@ -24,7 +24,7 @@ Note: For simplicity, we'll refer to MetaWeather as "old service" and OpenWeathe
 
 # About code and API responses
 * Responses from MetaWeather or OpenWeatherMap are mocked in this repo. There will be no actual API calls when the code is executed;
-* Only 3 day forecast for San Francisco from Feb 12, 2019 are provided in the mock responses. This assumption is made across the entire code base; 
+* Only 3 day forecast for San Francisco from Feb 12, 2019 are provided in the mock responses. This assumption is made across the entire code base;
 * Temperature unit is Celsius in the mock responses for consistency -- MetaWeather supports Celsius only while OpenWeatherMap supports all temperature units (one more reason to migrate!);
 * Both MetaWeather and OpenWeatherMap APIs return multiple forecast data points per day instead of daily summaries. Information like lowest humidity or highest temperature is derived from aggregated results of raw data (That piece of code is provided).
 * Weather data from MetaWeather and OpenWeatherMap is not identical. It's more than acceptable to observe slightly different results after the migration.

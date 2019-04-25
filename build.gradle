@@ -19,7 +19,7 @@ dependencies {
 }
 
 tasks.withType(Checkstyle) {
-    config = rootProject.resources.text.fromFile('src/codestyle/checkstyle.xml')
+    config = rootProject.resources.text.fromFile('codestyle/checkstyle.xml')
     reports {
         xml.enabled false
         html.enabled true
