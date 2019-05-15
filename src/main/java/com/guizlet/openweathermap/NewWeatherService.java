@@ -1,11 +1,12 @@
 package com.guizlet.openweathermap;
 
+import com.guizlet.shaobo.WeatherDailyForecast;
+import com.guizlet.shaobo.WeatherDataPoint;
+import com.guizlet.shaobo.WeatherService;
 import com.guizlet.utils.NewWeatherClient;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Map;
-import java.util.NoSuchElementException;
-import java.util.Optional;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 import java.util.stream.StreamSupport;
@@ -13,13 +14,14 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 
 
-public class NewWeatherService {
+public class NewWeatherService implements WeatherService {
 
   private static final String JSON_KEY_DATE = "dt_txt";
   private static final String JSON_KEY_MAIN = "main";
   private static final String JSON_KEY_LIST = "list";
   private static final String JSON_KEY_HUMIDITY = "humidity";
   private static final String JSON_KEY_TEMP_MAX = "temp_max";
+  private static final String JSON_KEY_SEA_LEVEL = "sea_level";
 
   private final NewWeatherClient newWeatherClient;
 
@@ -33,17 +35,17 @@ public class NewWeatherService {
    * @param city the requested city
    * @param date the requested date.
    * @return a list of {@link NewWeatherDailyForecast}. Each {@link NewWeatherDailyForecast}
-   *     represents a daily forecast of next 3 days.
+   * represents a daily forecast of next 3 days.
    */
-  public List<NewWeatherDailyForecast> getNext3DaysForecast(String city, LocalDate date) {
+  public List<WeatherDailyForecast> getNext3DaysForecast(String city, LocalDate date) {
     String jsonResponse = newWeatherClient.sendRequest(city, date);
 
     JSONObject jsonObject = new JSONObject(jsonResponse);
     JSONArray dataPoints = jsonObject.getJSONArray(JSON_KEY_LIST);
 
-    Map<String, List<NewWeatherDataPoint>> dataPointsByDate = getNewWeatherDataPointStream(
+    Map<String, List<WeatherDataPoint>> dataPointsByDate = getNewWeatherDataPointStream(
         dataPoints).collect(
-        Collectors.groupingBy(NewWeatherDataPoint::getApplicableDate));
+        Collectors.groupingBy(WeatherDataPoint::getApplicableDate));
 
     return dataPointsByDate.entrySet()
         .stream()
@@ -52,16 +54,17 @@ public class NewWeatherService {
         .collect(Collectors.toList());
   }
 
-  private Stream<NewWeatherDataPoint> getNewWeatherDataPointStream(JSONArray dataPoints) {
+  private Stream<NewWeatherDataPointImpl> getNewWeatherDataPointStream(JSONArray dataPoints) {
     return StreamSupport.stream(dataPoints.spliterator(), false).map(dataPoint -> {
       JSONObject dataPointJsonObject = (JSONObject) dataPoint;
       JSONObject mainDataBody = dataPointJsonObject.getJSONObject(JSON_KEY_MAIN);
       int humidity = mainDataBody.getInt(JSON_KEY_HUMIDITY);
       double tempMax = mainDataBody.getDouble(JSON_KEY_TEMP_MAX);
+      double seaLevel = mainDataBody.getDouble(JSON_KEY_SEA_LEVEL);
       // Date format from OpenWeatherMap: "2019-02-15 21:00:00"
       String applicableDate = dataPointJsonObject.getString(JSON_KEY_DATE).split(" ")[0];
 
-      return new NewWeatherDataPoint(applicableDate, humidity, tempMax);
+      return new NewWeatherDataPointImpl(applicableDate, humidity, tempMax, seaLevel);
     });
   }
 }

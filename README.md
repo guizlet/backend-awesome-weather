@@ -8,6 +8,11 @@ Note: For simplicity, we'll refer to MetaWeather as "old service" and OpenWeathe
 * Migrate the example code `LowestHumidityExample.java` to OpenWeatherMap APIs;
 * Use existing unit tests to verify migration results.
 
+## Bonus goals
+* Our engineers have been trying to figure out the correlation between humidity and sea level (people ask [similar questions](https://www.quora.com/Why-is-there-less-humidity-at-sea-level) on Quora). They can't make any progresses because the data of sea level is not supported in the old weather service but available in the new one. Print out the sea level of the lowest humidity data point in `LowestHumidityExample.java` based on 
+the code design you came up with earlier.
+* Explain how to release your changes in a safe and backward compatible way (the old weather service is serving production traffic).
+
 # File structure
 ## src/main/java
 * Java class `LowestHumidityExample.java`: where migration will take place;

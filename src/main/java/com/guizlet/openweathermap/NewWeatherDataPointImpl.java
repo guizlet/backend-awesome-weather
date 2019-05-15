@@ -1,15 +1,19 @@
 package com.guizlet.openweathermap;
 
-public class NewWeatherDataPoint {
+import com.guizlet.shaobo.NewWeatherDataPoint;
+
+public class NewWeatherDataPointImpl implements NewWeatherDataPoint {
 
   private final String applicableDate;
   private final int humidity;
   private final double maxTemp;
+  private final double seaLevel;
 
-  NewWeatherDataPoint(String applicableDate, int humidity, double maxTemp) {
+  NewWeatherDataPointImpl(String applicableDate, int humidity, double maxTemp, double seaLevel) {
     this.applicableDate = applicableDate;
     this.humidity = humidity;
     this.maxTemp = maxTemp;
+    this.seaLevel = seaLevel;
   }
 
   public String getApplicableDate() {
@@ -22,5 +26,9 @@ public class NewWeatherDataPoint {
 
   public double getMaxTemp() {
     return maxTemp;
+  }
+
+  public double getSeaLevel() {
+    return seaLevel;
   }
 }
