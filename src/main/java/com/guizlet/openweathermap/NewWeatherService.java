@@ -4,8 +4,6 @@ import com.guizlet.utils.NewWeatherClient;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Map;
-import java.util.NoSuchElementException;
-import java.util.Optional;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 import java.util.stream.StreamSupport;
@@ -20,6 +18,7 @@ public class NewWeatherService {
   private static final String JSON_KEY_LIST = "list";
   private static final String JSON_KEY_HUMIDITY = "humidity";
   private static final String JSON_KEY_TEMP_MAX = "temp_max";
+  private static final String JSON_KEY_SEA_LEVEL_PRESSURE = "sea_level";
 
   private final NewWeatherClient newWeatherClient;
 
@@ -33,7 +32,7 @@ public class NewWeatherService {
    * @param city the requested city
    * @param date the requested date.
    * @return a list of {@link NewWeatherDailyForecast}. Each {@link NewWeatherDailyForecast}
-   *     represents a daily forecast of next 3 days.
+   * represents a daily forecast of next 3 days.
    */
   public List<NewWeatherDailyForecast> getNext3DaysForecast(String city, LocalDate date) {
     String jsonResponse = newWeatherClient.sendRequest(city, date);
@@ -58,10 +57,11 @@ public class NewWeatherService {
       JSONObject mainDataBody = dataPointJsonObject.getJSONObject(JSON_KEY_MAIN);
       int humidity = mainDataBody.getInt(JSON_KEY_HUMIDITY);
       double tempMax = mainDataBody.getDouble(JSON_KEY_TEMP_MAX);
+      double seaLevelPressure = mainDataBody.getDouble(JSON_KEY_SEA_LEVEL_PRESSURE);
       // Date format from OpenWeatherMap: "2019-02-15 21:00:00"
       String applicableDate = dataPointJsonObject.getString(JSON_KEY_DATE).split(" ")[0];
 
-      return new NewWeatherDataPoint(applicableDate, humidity, tempMax);
+      return new NewWeatherDataPoint(applicableDate, humidity, tempMax, seaLevelPressure);
     });
   }
 }

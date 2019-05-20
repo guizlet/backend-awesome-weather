@@ -16,7 +16,7 @@ import java.util.Optional;
 public class LowestHumidityExample {
 
   /**
-   * Entrypoint for command line execution.
+   * Entry point for command line execution.
    *
    * @param args arguments supplied on command line.
    */
@@ -26,6 +26,7 @@ public class LowestHumidityExample {
     dataPointWithLowestHumidity.ifPresent(minHumidityDataPoint -> {
       System.out.println("Lowest humidity: " + minHumidityDataPoint.getHumidity());
       System.out.println("Lowest humidity date: " + minHumidityDataPoint.getApplicableDate());
+      // TODO: Print out sea-level pressure of this data point
     });
   }
 
