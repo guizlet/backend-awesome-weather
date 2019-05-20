@@ -9,8 +9,7 @@ Note: For simplicity, we'll refer to MetaWeather as "old service" and OpenWeathe
 * Use existing unit tests to verify migration results.
 
 ## Bonus goals
-* Our data scientists have been trying to figure out the correlation between humidity and [sea-level pressure](https://en.wikipedia.org/wiki/Atmospheric_pressure#Mean_sea-level_pressure). They can't make any progresses because the data of sea-level pressure is not supported in the old weather service and the good news is that it becomes available with the new one! Let's print out the sea-level pressure of the lowest humidity data point in `LowestHumidityExample.java` based on 
-the code design you came up with earlier.
+* Our data scientists have been trying to figure out the correlation between humidity and [sea-level pressure](https://en.wikipedia.org/wiki/Atmospheric_pressure#Mean_sea-level_pressure). They can't make any progresses because the data of sea-level pressure is not supported in the old weather service and the good news is that it becomes available with the new one! Let's print out the sea-level pressure of the lowest humidity data point in `LowestHumidityExample.java` based on the code design you came up with earlier.
 * Explain how to release your changes in a safe and backward compatible way (the old weather service is serving production traffic).
 
 # File structure
