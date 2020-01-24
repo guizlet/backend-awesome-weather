@@ -26,7 +26,7 @@ public class LowestHumidityExample {
     dataPointWithLowestHumidity.ifPresent(minHumidityDataPoint -> {
       System.out.println("Lowest humidity: " + minHumidityDataPoint.getHumidity());
       System.out.println("Lowest humidity date: " + minHumidityDataPoint.getApplicableDate());
-      // TODO: Print out sea-level pressure of this data point
+      // BONUS: Print out sea-level pressure of this data point
     });
   }
 
