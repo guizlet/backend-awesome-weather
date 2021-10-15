@@ -1,16 +1,16 @@
 # Background
-MetaWeather service has been well adopted internally. Its main responsibility is to fetch weather data from the third-party service https://www.metaweather.com which is in turn consumed by several downstream clients. Over time we start to realize that APIs from MetaWeather lack some features and do not meet our new requirements. Our goal is to migrate to APIs provided by https://openweathermap.org/api , which come with richer data sets, better documentation and more API parameters for finer-grained control.
+Our app currently relies internally on the API of a third-party service, MetaWeather (https://www.metaweather.com). It fetches weather data from this service, which are in turn consumed by several clients. Over time we've been finding that the MetaWeather API lacks some features and does not meet all of our new requirements. Our goal is to migrate to an API provided by OpenWeather (https://openweathermap.org/api), which comes with richer data sets, better documentation and more options for finer-grained control.
 
 Note: For simplicity, we'll refer to MetaWeather as "old service" and OpenWeatherMap as "new service" across all Java classes.
 
 # Goals
-* Improve code design in this project so that we will modify less code when migrating to yet another weather service in the future;
 * Migrate the example code `LowestHumidityExample.java` to OpenWeatherMap APIs;
+* Improve the code design so that it will be easier to modify our code the next time, if we ever need to migrate to yet another weather service in the future;
 * Use existing unit tests to verify migration results.
 
 ## Bonus goals
-* Our data scientists have been trying to figure out the correlation between humidity and [sea-level pressure](https://en.wikipedia.org/wiki/Atmospheric_pressure#Mean_sea-level_pressure). They can't make any progresses because the data of sea-level pressure is not supported in the old weather service and the good news is that it becomes available with the new one! Let's print out the sea-level pressure of the lowest humidity data point in `LowestHumidityExample.java` based on the code design you came up with earlier.
-* Explain how to release your changes in a safe and backward compatible way (the old weather service is serving production traffic).
+* Our data scientists have been trying to figure out the correlation between humidity and [sea-level pressure](https://en.wikipedia.org/wiki/Atmospheric_pressure#Mean_sea-level_pressure). They can't make any progress, because information about sea-level pressure is not available in the old weather service. The good news is that it is available with the new one! Let's print out the sea-level pressure of the lowest humidity data point in `LowestHumidityExample.java` based on the code design you came up with earlier.
+* Explain how to release your changes in a safe and backward-compatible way (the old weather service is still serving production traffic).
 
 # File structure
 ## src/main/java
@@ -28,20 +28,18 @@ Note: For simplicity, we'll refer to MetaWeather as "old service" and OpenWeathe
 
 # About code and API responses
 * Responses from MetaWeather or OpenWeatherMap are mocked in this repo. There will be no actual API calls when the code is executed;
-* Only 3 day forecast for San Francisco from Feb 12, 2019 are provided in the mock responses. This assumption is made across the entire code base;
-* Temperature unit is Celsius in the mock responses for consistency -- MetaWeather supports Celsius only while OpenWeatherMap supports all temperature units (one more reason to migrate!);
+* Only 3-day forecasts for San Francisco from Feb 12, 2019 are provided in the mock responses. This assumption is made across the entire code base;
+* Temperature unit is Celsius in the mock responses for consistency. MetaWeather supports Celsius only, while OpenWeatherMap supports all temperature units (one more reason to migrate!);
 * Both MetaWeather and OpenWeatherMap APIs return multiple forecast data points per day instead of daily summaries. Information like lowest humidity or highest temperature is derived from aggregated results of raw data (That piece of code is provided).
-* Weather data from MetaWeather and OpenWeatherMap is not identical. It's more than acceptable to observe slightly different results after the migration.
+* Weather data from MetaWeather and OpenWeatherMap is not identical. It's perfectly acceptable to have slightly different results after the migration.
 
-# Submit your solution
-Before you start, create a new branch for your solution:
+# Prepare your solution
+Before you start, you might want to create a new local branch for your solution:
 ```
 git checkout -b "interview/${USER}"
 ```
-Submitting the solution:
-```
-git push -u origin "interview/${USER}"
-```
+
+You can review your changes with your interviewer, whether in person or by sharing your screen.
 
 # Run tests
 Run unit tests
@@ -66,7 +64,7 @@ Average high for next 3 days in San Francisco: 13.984444444444444
 ```
 
 # System requirements
-* JDK: 1.8
+* JDK: 1.8 or later
 
 # References
 ## MetaWeather API Doc
